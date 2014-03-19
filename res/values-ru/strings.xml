@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">IPTV Плеер</string>
+    <string name="action_settings">Настройки</string>
+    <string name="default_url_chanel">https://dl.dropboxusercontent.com/u/35149089/tv.m3u</string>
+    <string name="default_url_prog">http://help.telecom.by/_files/TelecomTV/TelecomTVepg.zip</string>
+    <string name="UrlIptvChanel">Адрес url с списком iptv каналов</string>
+    <string name="UrlIptvProg">Url с программой JTG iptv</string>
+    <string name="Save">Применить</string>
+    <string name="setup">Настройка</string>
+    <string name="update">Обновить список ТВ</string>
+    <string name="exit">Выход</string>
+
+</resources>
