@@ -1,5 +1,7 @@
 package by.makarov.video.menudrawer;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import io.vov.vitamio.utils.Log;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
 public class VideoFragment extends Fragment {
-    public static String srcPath;
+    private static String srcPath;
+    private final static String CURRENT_POSITION  = "currentPosition";
 
     public static void setSrc(String src) {
         srcPath = src;
@@ -22,7 +27,11 @@ public class VideoFragment extends Fragment {
     FrameLayout frameLayout;
     VideoView myVideoView;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +47,7 @@ public class VideoFragment extends Fragment {
         return frameLayout;
     }
 
-    public void runVideo() {
+    private void runVideo() {
         myVideoView = new VideoView(getActivity());
         myVideoView.setKeepScreenOn(true);
         myVideoView.setLayoutParams(new FrameLayout.LayoutParams(
@@ -63,13 +72,23 @@ public class VideoFragment extends Fragment {
     public void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
-        myVideoView.suspend();
+        SharedPreferences.Editor myPrefs = getActivity().getSharedPreferences(CURRENT_POSITION, Context.MODE_WORLD_WRITEABLE).edit();
+        myPrefs.putLong(CURRENT_POSITION, myVideoView.getCurrentPosition());
+
+        myPrefs.commit();
+        myVideoView.pause();
     }
 
     @Override
     public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
+        if(myVideoView == null)
+            return;
+        SharedPreferences myPrefs = getActivity().getSharedPreferences(CURRENT_POSITION, Context.MODE_WORLD_READABLE);
+        myVideoView.seekTo(myPrefs.getLong(CURRENT_POSITION, myVideoView.getCurrentPosition()));
+//        myVideoView.start();
+
         myVideoView.resume();
     }
 

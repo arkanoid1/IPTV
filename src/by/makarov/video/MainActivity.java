@@ -12,6 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import by.makarov.video.R.string;
 import by.makarov.video.database.DBManager;
 import by.makarov.video.entitys.ChanelM3U;
@@ -48,14 +50,17 @@ public class MainActivity extends FragmentActivity implements Update {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //if there is a selected channel, and its look
         if (savedInstanceState != null) {
             mActivePosition = savedInstanceState.getInt(STATE_ACTIVE_POSITION);
         }
+
         setContentView(R.layout.main);
+
         // get url list programm from shared preferences
         sp = getSharedPreferences("iptv", MODE_PRIVATE);
         URL = sp.getString("urlIptv", "");
-        // if URL empty to need setup
+        // if URL empty to need setup (this url stored after update chanel)
         if (URL.isEmpty()) {
             startActivity(new Intent(this, SetupActivity.class));
             finish();
@@ -137,6 +142,7 @@ public class MainActivity extends FragmentActivity implements Update {
         mList.setOnItemClickListener(mItemClickListener);
 
         mMenuDrawer.setMenuView(mList);
+
     }
 
     @Override
@@ -238,5 +244,6 @@ public class MainActivity extends FragmentActivity implements Update {
         // TODO Auto-generated method stub
         createMenu();
         mPagerAdapter.notifyDataSetChanged();
+        Toast.makeText(this, string.ReadyUpdate, Toast.LENGTH_SHORT).show();
     }
 }

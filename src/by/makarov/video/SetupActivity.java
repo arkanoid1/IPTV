@@ -48,7 +48,8 @@ public class SetupActivity extends Activity implements OnClickListener ,Update{
 
 	}
 
-	void saveConfig() {
+
+    void saveConfig() {
 		pref = getSharedPreferences("iptv",MODE_PRIVATE);
 		Editor ed = pref.edit();
 		ed.putString("urlIptv", et.getText().toString());
@@ -59,7 +60,7 @@ public class SetupActivity extends Activity implements OnClickListener ,Update{
 
 	@Override
 	public void callBack() {
-		Toast.makeText(this, "Tv list updated", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, string.ReadyUpdate , Toast.LENGTH_SHORT).show();
 		startActivity(new Intent(this, MainActivity.class));
 		finish();
 	}
