@@ -3,7 +3,7 @@
 
     <string name="app_name">IPTV</string>
     <string name="action_settings">Settings</string>
-    <string name="default_url_chanel">https://dl.dropboxusercontent.com/u/35149089/tv.m3u</string>
+    <string name="default_url_chanel">http://help.telecom.by/_files/TelecomTV/TelecomTVpacket/TVPACKET2.m3u</string>
     <string name="default_url_prog">http://help.telecom.by/_files/TelecomTV/TelecomTVepg.zip</string>
     <string name="UrlIptvChanel">Adress url iptv chanel list</string>
     <string name="UrlIptvProg">Url iptv programs</string>

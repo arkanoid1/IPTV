@@ -51,7 +51,6 @@ public class MainActivity extends FragmentActivity implements Update {
         if (savedInstanceState != null) {
             mActivePosition = savedInstanceState.getInt(STATE_ACTIVE_POSITION);
         }
-
         setContentView(R.layout.main);
         // get url list programm from shared preferences
         sp = getSharedPreferences("iptv", MODE_PRIVATE);
@@ -103,6 +102,7 @@ public class MainActivity extends FragmentActivity implements Update {
     protected void onResume() {
         // TODO Auto-generated method stub
 //		fullScrean();
+        getActionBar().hide();
         super.onResume();
     }
 

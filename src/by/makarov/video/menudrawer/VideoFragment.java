@@ -22,6 +22,8 @@ public class VideoFragment extends Fragment {
     FrameLayout frameLayout;
     VideoView myVideoView;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class VideoFragment extends Fragment {
         myVideoView.setBufferSize(4096);
         myVideoView.setX(1);
         myVideoView.setY(1);
+
 
         myVideoView.requestFocus();
 
