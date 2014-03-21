@@ -9,6 +9,7 @@
     <string name="UrlIptvProg">Url iptv programs</string>
     <string name="setup">Setup</string>
     <string name="update">Update list TV</string>
+    <string name="ReadyUpdate">Channel list is updated</string>
     <string name="exit">Exit</string>
     <string name="Save">Save</string>
 

@@ -10,6 +10,7 @@
     <string name="Save">Применить</string>
     <string name="setup">Настройка</string>
     <string name="update">Обновить список ТВ</string>
+    <string name="ReadyUpdate">Список каналов обновлён</string>
     <string name="exit">Выход</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package by.makarov.video;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +13,6 @@ import android.support.v4.view.ViewPager;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import by.makarov.video.R.string;
 import by.makarov.video.database.DBManager;
@@ -22,6 +22,7 @@ import by.makarov.video.menudrawer.MenuAdapter;
 import by.makarov.video.menudrawer.PagerAdapter;
 import by.makarov.video.menudrawer.VideoFragment;
 import by.makarov.video.task.UpdateTVListTask;
+import io.vov.vitamio.widget.VideoView;
 import net.simonvt.menudrawer.MenuDrawer;
 
 import java.net.URL;
@@ -54,8 +55,10 @@ public class MainActivity extends FragmentActivity implements Update {
         if (savedInstanceState != null) {
             mActivePosition = savedInstanceState.getInt(STATE_ACTIVE_POSITION);
         }
-
+        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main);
+
 
         // get url list programm from shared preferences
         sp = getSharedPreferences("iptv", MODE_PRIVATE);
@@ -107,7 +110,7 @@ public class MainActivity extends FragmentActivity implements Update {
     protected void onResume() {
         // TODO Auto-generated method stub
 //		fullScrean();
-        getActionBar().hide();
+//        getActionBar().hide();
         super.onResume();
     }
 
@@ -147,7 +150,7 @@ public class MainActivity extends FragmentActivity implements Update {
 
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
-        return null;
+           return null;
     }
 
     private AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
