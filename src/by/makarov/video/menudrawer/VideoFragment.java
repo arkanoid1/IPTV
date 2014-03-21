@@ -1,7 +1,5 @@
 package by.makarov.video.menudrawer;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,14 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
-import io.vov.vitamio.utils.Log;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
 public class VideoFragment extends Fragment {
     private static String srcPath;
-    private final static String CURRENT_POSITION  = "currentPosition";
+    private final static String CURRENT_POSITION = "currentPosition";
 
     public static void setSrc(String src) {
         srcPath = src;
@@ -26,6 +22,7 @@ public class VideoFragment extends Fragment {
 
     FrameLayout frameLayout;
     VideoView myVideoView;
+    private long mPosition = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,26 +67,20 @@ public class VideoFragment extends Fragment {
 
     @Override
     public void onPause() {
-        // TODO Auto-generated method stub
+        mPosition = myVideoView.getCurrentPosition();
+        myVideoView.stopPlayback();
         super.onPause();
-        SharedPreferences.Editor myPrefs = getActivity().getSharedPreferences(CURRENT_POSITION, Context.MODE_WORLD_WRITEABLE).edit();
-        myPrefs.putLong(CURRENT_POSITION, myVideoView.getCurrentPosition());
-
-        myPrefs.commit();
-        myVideoView.pause();
     }
 
     @Override
     public void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-        if(myVideoView == null)
-            return;
-        SharedPreferences myPrefs = getActivity().getSharedPreferences(CURRENT_POSITION, Context.MODE_WORLD_READABLE);
-        myVideoView.seekTo(myPrefs.getLong(CURRENT_POSITION, myVideoView.getCurrentPosition()));
-//        myVideoView.start();
+        if (mPosition > 0) {
+            myVideoView.seekTo(mPosition);
+            mPosition = 0;
+        }
 
-        myVideoView.resume();
+        super.onResume();
+        myVideoView.start();
     }
 
     @Override
