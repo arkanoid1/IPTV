@@ -1,6 +1,6 @@
 package by.makarov.video;
 
-import android.app.Fragment;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +22,6 @@ import by.makarov.video.menudrawer.MenuAdapter;
 import by.makarov.video.menudrawer.PagerAdapter;
 import by.makarov.video.menudrawer.VideoFragment;
 import by.makarov.video.task.UpdateTVListTask;
-import io.vov.vitamio.widget.VideoView;
 import net.simonvt.menudrawer.MenuDrawer;
 
 import java.net.URL;
@@ -45,12 +44,14 @@ public class MainActivity extends FragmentActivity implements Update {
     private final int UPDATE = 1;
     private final int SETUP = 2;
     private final int EXIT = 3;
+    private ActionBar actionBar;
 
     private ArrayList<ChanelM3U> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //if there is a selected channel, and its look
         if (savedInstanceState != null) {
             mActivePosition = savedInstanceState.getInt(STATE_ACTIVE_POSITION);
@@ -58,7 +59,7 @@ public class MainActivity extends FragmentActivity implements Update {
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main);
-
+        actionBar =  getActionBar();
 
         // get url list programm from shared preferences
         sp = getSharedPreferences("iptv", MODE_PRIVATE);
@@ -111,6 +112,7 @@ public class MainActivity extends FragmentActivity implements Update {
         // TODO Auto-generated method stub
 //		fullScrean();
 //        getActionBar().hide();
+
         super.onResume();
     }
 
@@ -160,6 +162,7 @@ public class MainActivity extends FragmentActivity implements Update {
             mActivePosition = position;
             srcPath = list.get(position).getUrlCanal();
             VideoFragment.setSrc(srcPath);
+            actionBar.setTitle(list.get(position).getCanalName());
             mPagerAdapter.notifyDataSetChanged();
             // mViewPager.setOffscreenPageLimit(TRIM_MEMORY_RUNNING_LOW);
             mMenuDrawer.setActiveView(view, position);
